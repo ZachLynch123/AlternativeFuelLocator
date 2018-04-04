@@ -4,18 +4,20 @@ package com.zachary.lynch.altfuelmap;
 
 public class StationData {
     private String mFuel_type_code;
+    private int mId;
     private String mStation_Phone;
     private String mStation_Name;
-    private String mLatitude;
-    private String mLongitude;
+    private double mLatitude;
+    private double mLongitude;
     private String mCity;
     private String mState;
     private String mStreet_address;
-    private String mZip;
+    private double mZip;
     private String mCountry;
-    private String mHasE85;
+    private double mHasE85;
     private String mE85;
     private String mElectirc;
+    private double mTotal;
 
     public String getFuel_type_code() {
         return mFuel_type_code;
@@ -41,19 +43,19 @@ public class StationData {
         mStation_Name = station_Name;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return mLatitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         mLatitude = latitude;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return mLongitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         mLongitude = longitude;
     }
 
@@ -81,11 +83,11 @@ public class StationData {
         mStreet_address = street_address;
     }
 
-    public String getZip() {
+    public double getZip() {
         return mZip;
     }
 
-    public void setZip(String zip) {
+    public void setZip(double zip) {
         mZip = zip;
     }
 
@@ -97,11 +99,27 @@ public class StationData {
         mCountry = country;
     }
 
-    public String getHasE85() {
+    public double getHasE85() {
         return mHasE85;
     }
 
-    public void setHasE85(String hasE85) {
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int id) {
+        mId = id;
+    }
+
+    public double getTotal() {
+        return mTotal;
+    }
+
+    public void setTotal(double total) {
+        mTotal = total;
+    }
+
+    public void setHasE85(double hasE85) {
         mHasE85 = hasE85;
     }
 

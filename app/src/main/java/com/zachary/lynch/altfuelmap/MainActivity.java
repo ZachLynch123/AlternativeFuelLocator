@@ -5,6 +5,10 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +21,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
+    private StationData mFuelStations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +50,31 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(Call call, Response response) throws IOException {
                     String jsonData = response.body().string();
                     if (response.isSuccessful()){
+                        try {
+                            mFuelStations = getCurrentDetails(jsonData);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
+                    }
+                    else {
+                        alertUserAboutError();
                     }
                 }
             });
-
+            }
+            else {
+            Toast.makeText(this, "network unavailable", Toast.LENGTH_LONG).show();
+        }
 
         }
 
+    // TODO: 4. Create a method to print data to log
+    private StationData getCurrentDetails(String jsonData) throws JSONException {
+        JSONObject gasStation = new JSONObject(jsonData);
+
     }
+
     // TODO: 2. Use Connectivity manager to see if the network is available
     private boolean isNetworkAvailable() {
         ConnectivityManager manager = (ConnectivityManager)
