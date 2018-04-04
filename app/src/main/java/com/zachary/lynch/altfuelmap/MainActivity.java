@@ -5,6 +5,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         ApiKey apiKey = new ApiKey();
 
         // TODO: 1. build the url
-        String fuelUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?limit=1&api_key=YOUR_KEY_HERE"
+        String fuelUrl = "https://developer.nrel.gov/api/alt-fuel-stations/v1.json?limit=1&api_key="
                 + apiKey.getAPI_KEY();
         if (isNetworkAvailable()){
             //TODO: 3. use OkHttp to get an Asynchronous get to get data from api
@@ -53,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             mFuelStations = getCurrentDetails(jsonData);
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.e(TAG, "Exception caught: ", e);
                         }
 
                     }
                     else {
-                        alertUserAboutError();
+                        // alertUserAboutError();
                     }
                 }
             });
@@ -72,7 +73,10 @@ public class MainActivity extends AppCompatActivity {
     // TODO: 4. Create a method to print data to log
     private StationData getCurrentDetails(String jsonData) throws JSONException {
         JSONObject gasStation = new JSONObject(jsonData);
-
+        double totalStations = gasStation.getDouble("total_results");
+        Log.i(TAG, "From JSON" + totalStations);
+        StationData stationData = new StationData();
+        return stationData;
     }
 
     // TODO: 2. Use Connectivity manager to see if the network is available
